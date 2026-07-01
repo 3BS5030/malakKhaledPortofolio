@@ -1,0 +1,564 @@
+/* ========================================
+   GSAP Animation States & Helpers
+   ======================================== */
+
+[data-anim] {
+  opacity: 0;
+}
+
+[data-anim].is-revealed {
+  opacity: 1;
+}
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.anim-fade-down {
+  opacity: 0;
+  transform: translateY(-40px);
+}
+
+.anim-fade-left {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.anim-fade-right {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.anim-scale-in {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.anim-rotate-in {
+  opacity: 0;
+  transform: rotate(-10deg) scale(0.9);
+}
+
+.anim-blur-in {
+  opacity: 0;
+  filter: blur(10px);
+}
+
+/* ========================================
+   Mask Reveal Animation
+   ======================================== */
+.mask-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.mask-reveal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateX(-101%);
+}
+
+.mask-reveal.is-revealed::after {
+  transform: translateX(101%);
+  transition: transform 1s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.mask-reveal .mask-content {
+  display: block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition-delay: 0.5s;
+}
+
+.mask-reveal.is-revealed .mask-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================
+   Text Split Animations
+   ======================================== */
+.split-line {
+  overflow: hidden;
+}
+
+.split-char,
+.split-word {
+  opacity: 0;
+  display: inline-block;
+  transform: translateY(100%);
+}
+
+.split-char.is-visible,
+.split-word.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================
+   Keyframe Animations
+   ======================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes morphBlob {
+  0% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    border-radius: 50% 60% 30% 70% / 40% 50% 60% 50%;
+  }
+  75% {
+    border-radius: 60% 30% 60% 40% / 50% 40% 70% 50%;
+  }
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes morphGradient {
+  0% {
+    filter: hue-rotate(0deg) blur(60px);
+  }
+  50% {
+    filter: hue-rotate(30deg) blur(80px);
+  }
+  100% {
+    filter: hue-rotate(0deg) blur(60px);
+  }
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    border-color: rgba(201, 168, 76, 0.1);
+    box-shadow: 0 0 15px rgba(201, 168, 76, 0);
+  }
+  50% {
+    border-color: rgba(201, 168, 76, 0.4);
+    box-shadow: 0 0 25px rgba(201, 168, 76, 0.15);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* ========================================
+   Section Transition Effects
+   ======================================== */
+.section-transition {
+  position: relative;
+}
+
+.section-transition::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.2;
+}
+
+/* ========================================
+   Pinned Section Animation
+   ======================================== */
+.pinned-section {
+  position: relative;
+}
+
+.pinned-content {
+  will-change: transform;
+}
+
+/* ========================================
+   Horizontal Scroll (Certificates)
+   ======================================== */
+.horizontal-scroll {
+  display: flex;
+  overflow: hidden;
+  gap: 24px;
+  padding: 40px 0;
+}
+
+.horizontal-scroll .scroll-item {
+  flex: 0 0 320px;
+  will-change: transform;
+}
+
+/* ========================================
+   Card Entry Animations
+   ======================================== */
+.card-stagger-enter {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.card-stagger-enter.is-visible {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.card-stagger-enter:nth-child(1) { transition-delay: 0s; }
+.card-stagger-enter:nth-child(2) { transition-delay: 0.05s; }
+.card-stagger-enter:nth-child(3) { transition-delay: 0.1s; }
+.card-stagger-enter:nth-child(4) { transition-delay: 0.15s; }
+.card-stagger-enter:nth-child(5) { transition-delay: 0.2s; }
+.card-stagger-enter:nth-child(6) { transition-delay: 0.25s; }
+.card-stagger-enter:nth-child(7) { transition-delay: 0.3s; }
+.card-stagger-enter:nth-child(8) { transition-delay: 0.35s; }
+.card-stagger-enter:nth-child(9) { transition-delay: 0.4s; }
+.card-stagger-enter:nth-child(10) { transition-delay: 0.45s; }
+.card-stagger-enter:nth-child(11) { transition-delay: 0.5s; }
+.card-stagger-enter:nth-child(12) { transition-delay: 0.55s; }
+.card-stagger-enter:nth-child(13) { transition-delay: 0.6s; }
+.card-stagger-enter:nth-child(14) { transition-delay: 0.65s; }
+.card-stagger-enter:nth-child(15) { transition-delay: 0.7s; }
+.card-stagger-enter:nth-child(16) { transition-delay: 0.75s; }
+.card-stagger-enter:nth-child(17) { transition-delay: 0.8s; }
+.card-stagger-enter:nth-child(18) { transition-delay: 0.85s; }
+.card-stagger-enter:nth-child(19) { transition-delay: 0.9s; }
+.card-stagger-enter:nth-child(20) { transition-delay: 0.95s; }
+.card-stagger-enter:nth-child(21) { transition-delay: 1s; }
+.card-stagger-enter:nth-child(22) { transition-delay: 1.05s; }
+.card-stagger-enter:nth-child(23) { transition-delay: 1.1s; }
+.card-stagger-enter:nth-child(24) { transition-delay: 1.15s; }
+
+/* ========================================
+   Certificate Stack Animation
+   ======================================== */
+.cert-stack-item {
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.cert-stack-item:nth-child(1) { transform: rotate(-2deg) translateY(0); }
+.cert-stack-item:nth-child(2) { transform: rotate(1deg) translateY(-10px); }
+.cert-stack-item:nth-child(3) { transform: rotate(-0.5deg) translateY(-20px); }
+.cert-stack-item:nth-child(4) { transform: rotate(1.5deg) translateY(-30px); }
+.cert-stack-item:nth-child(5) { transform: rotate(-1deg) translateY(-40px); }
+
+.cert-stack-item.is-active {
+  transform: rotate(0deg) translateY(0) scale(1.02);
+  z-index: 10;
+}
+
+/* ========================================
+   Infinite Marquee (Duplicated in JS)
+   ======================================== */
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+/* ========================================
+   Image Reveal Effect
+   ======================================== */
+.img-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.img-reveal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  z-index: 2;
+  transform: translateY(101%);
+}
+
+.img-reveal.is-revealed::before {
+  transform: translateY(-101%);
+  transition: transform 0.8s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.img-reveal img {
+  transform: scale(1.1);
+  transition: transform 0.8s cubic-bezier(0.77, 0, 0.18, 1);
+  transition-delay: 0.3s;
+}
+
+.img-reveal.is-revealed img {
+  transform: scale(1);
+}
+
+/* ========================================
+   Magnetic Button Effect
+   ======================================== */
+.magnetic-btn {
+  will-change: transform;
+  transition: transform 0.2s ease;
+}
+
+/* ========================================
+   Parallax Layers
+   ======================================== */
+.parallax-layer {
+  will-change: transform;
+}
+
+.parallax-slow {
+  transition: transform 0.1s ease-out;
+}
+
+.parallax-medium {
+  transition: transform 0.05s ease-out;
+}
+
+.parallax-fast {
+  transition: transform 0.02s linear;
+}
+
+/* ========================================
+   Three.js Background
+   ======================================== */
+#threeBg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* ========================================
+   AOS Override for Performance
+   ======================================== */
+[data-aos] {
+  pointer-events: none;
+}
+
+[data-aos].aos-animate {
+  pointer-events: auto;
+}
+
+/* ========================================
+   GSAP ScrollTrigger Pin Spacer
+   ======================================== */
+.gsap-pin-spacer {
+  pointer-events: none;
+}
+
+/* ========================================
+   Smooth Scrollbar overrides
+   ======================================== */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ========================================
+   Gallery Lightbox Enhancements
+   ======================================== */
+.glightbox-clean .gslide-description {
+  background: var(--navy-dark) !important;
+}
+
+.glightbox-clean .gslide-title {
+  color: var(--white) !important;
+  font-family: var(--font-arabic) !important;
+}
+
+.glightbox-clean .gslide-desc {
+  color: var(--gray) !important;
+  font-family: var(--font-english) !important;
+}
+
+.glightbox-clean .gslide-image img {
+  border: 4px solid rgba(201, 168, 76, 0.3) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ========================================
+   Hover Image Overlay
+   ======================================== */
+.hover-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-reveal img {
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hover-reveal:hover img {
+  transform: scale(1.08);
+}
+
+.hover-reveal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 22, 40, 0.5);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.hover-reveal:hover::after {
+  opacity: 1;
+}
+
+/* ========================================
+   Morphing Background (Three.js fallback)
+   ======================================== */
+.morphing-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.morphing-blob {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.06), transparent);
+  border-radius: 50%;
+  animation: morphBlob 12s ease-in-out infinite, floatShape 20s ease-in-out infinite;
+  filter: blur(40px);
+}
+
+.morphing-blob:nth-child(1) {
+  top: 20%;
+  left: 10%;
+  width: 400px;
+  height: 400px;
+  animation-delay: 0s, 0s;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.05), transparent);
+}
+
+.morphing-blob:nth-child(2) {
+  bottom: 10%;
+  right: 5%;
+  width: 350px;
+  height: 350px;
+  animation-delay: -3s, -5s;
+  background: radial-gradient(circle, rgba(46, 204, 113, 0.04), transparent);
+}
+
+.morphing-blob:nth-child(3) {
+  top: 50%;
+  right: 30%;
+  width: 250px;
+  height: 250px;
+  animation-delay: -6s, -10s;
+  background: radial-gradient(circle, rgba(126, 200, 227, 0.04), transparent);
+}
